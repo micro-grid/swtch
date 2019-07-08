@@ -1,4 +1,12 @@
-# List of Issues
+---
+layout: page
+title: A List of Problems
+permalink: /problems/
+---
+
+# List of Problems
+
+I encountered many problems when trying to successfully build the SDN Switch. Here are some notes on how I resolved them.
 
 ## DELL BIOS Update
 
@@ -8,7 +16,7 @@ Recent versions of the DELL motherboards and BIOS allow you to simply copy the f
 
 I had to create a FreeDOS bootable USB stick and copy the most recent firmware for my system. 
 
-I followed these directions https://www.dell.com/support/article/us/en/04/sln171755/updating-the-dell-bios-in-linux-and-ubuntu-environments?lang=en 
+I followed the directions from DELL Website [https://www.dell.com/support/article/us/en/04/sln171755/updating-the-dell-bios-in-linux-and-ubuntu-environments?lang=en] 
   
 Right now my BIOS is at version A22.
 

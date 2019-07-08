@@ -34,3 +34,5 @@ export DPDK_BUILD=/usr/src/dpdk-stable-18.11.1/x86_64-native-linuxapp-gcc
 export DPDK_DIR=/usr/src/dpdk-stable-18.11.1
 export DPDK_TARGET=x86_64-native-linuxapp-gcc
 
+# Add Open vSwitch scripts to the PATH
+export PATH=$PATH:/usr/share/openvswitch/scripts

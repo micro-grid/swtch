@@ -1,3 +1,15 @@
+---
+layout: page
+title: Ubuntu APT Install Log
+permalink: /apt/
+---
+
+# APT Install Log
+
+The following software packages were installed on Ubuntu 18.04 Bionic to get DPDK, OpenvSwitch, and
+Faucet up and running.
+
+```
 sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common build-essential pkg-config zip g++ zlib1g-dev unzip python tree htop
 sudo apt-get install vim ctags vim-doc vim-scripts 
 sudo apt-get install gcc-multilib
@@ -25,3 +37,4 @@ sudo apt-get install curl gnupg apt-transport-https lsb-release
 echo "deb https://packagecloud.io/faucetsdn/faucet/$(lsb_release -si | awk '{print tolower($0)}')/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/faucet.list
 curl -L https://packagecloud.io/faucetsdn/faucet/gpgkey | sudo apt-key add -
 sudo apt-get install faucet-all-in-one
+```

@@ -1,3 +1,13 @@
+---
+layout: page
+title: MTRR Failures
+permalink: /mtrr-failure/
+---
+
+# MTRR Failures
+
+Here is the MTRR failure reported by the Linux kernel in dmesg.
+
 ```
 [    0.000000] MTRR variable ranges enabled:
 [    0.000000]   0 base 000000000 mask C00000000 write-back
