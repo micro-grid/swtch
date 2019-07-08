@@ -19,8 +19,8 @@ description: >- # this means to ignore newlines until "baseurl:"
   A primer on building a physical Software Defined Networking (SDN) Switch
   using Ubuntu 18.04, DPDK-Stable-18.11.1, OpenvSwitch-2.11.1, Faucet-SDN, 
   Intel 4-port Network Interface Card (NIC), Realtek 4-port NIC.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/swtch" # the subpath of your site, e.g. /blog
+url: "https://micro-grid.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: smahate
 github_username:  shakeel
 
