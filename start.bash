@@ -89,8 +89,61 @@ sudo ovs-vsctl set-controller br0 tcp:127.0.0.1:6653
 
 # Verify bridge name br0, fail_mode secure, protocols OpenFlow13, etc
 sudo ovs-vsctl list bridge
+# _uuid               : efe0a687-a80c-4660-ba74-3b40cbde7b50
+# auto_attach         : []
+# controller          : [0ca6ce20-8f52-435a-88b0-205e9165f64e]
+# datapath_id         : "0000a0369f083328"
+# datapath_type       : netdev
+# datapath_version    : "<built-in>"
+# external_ids        : {}
+# fail_mode           : secure
+# flood_vlans         : []
+# flow_tables         : {}
+# ipfix               : []
+# mcast_snooping_enable: false
+# mirrors             : []
+# name                : "br0"
+# netflow             : []
+# other_config        : {}
+# ports               : [3df7ddde-e467-42a3-9465-25c4f3bdff6d, a106f349-6ba3-4d3e-a0ed-30f47e20e927, c353d7fc-4e69-47af-b2f6-5962548ec390, cf5c2ff1-fc4d-4784-befb-29997adaef88, ea30e361-007a-48bc-81fc-ebda9345d3eb]
+# protocols           : ["OpenFlow13"]
+# rstp_enable         : false
+# rstp_status         : {}
+# sflow               : []
+# status              : {}
+# stp_enable          : false
 
 sudo ovs-ofctl -O OpenFlow13 show br0
+# OFPT_FEATURES_REPLY (OF1.3) (xid=0x2): dpid:0000a0369f083328
+# n_tables:254, n_buffers:0
+# capabilities: FLOW_STATS TABLE_STATS PORT_STATS GROUP_STATS QUEUE_STATS
+# OFPST_PORT_DESC reply (OF1.3) (xid=0x3):
+#  1(dpdk0): addr:a0:36:9f:08:33:29
+#      config:     0
+#      state:      LINK_DOWN
+#      current:    OTHER
+#      speed: 0 Mbps now, 0 Mbps max
+#  2(dpdk1): addr:a0:36:9f:08:33:28
+#      config:     0
+#      state:      LINK_DOWN
+#      current:    OTHER
+#      speed: 0 Mbps now, 0 Mbps max
+#  3(dpdk2): addr:a0:36:9f:08:33:2b
+#      config:     0
+#      state:      LINK_DOWN
+#      current:    OTHER
+#      speed: 0 Mbps now, 0 Mbps max
+#  4(dpdk3): addr:a0:36:9f:08:33:2a
+#      config:     0
+#      state:      LINK_DOWN
+#      current:    OTHER
+#      speed: 0 Mbps now, 0 Mbps max
+#  LOCAL(br0): addr:a0:36:9f:08:33:28
+#      config:     PORT_DOWN
+#      state:      LINK_DOWN
+#      current:    10MB-FD COPPER
+#      speed: 10 Mbps now, 0 Mbps max
+# OFPT_GET_CONFIG_REPLY (OF1.3) (xid=0x9): frags=normal miss_send_len=0
 
 # Faucet needs the datapath_id for br0, make a note of it
 sudo ovs-vsctl get bridge br0 datapath_id
