@@ -4,8 +4,6 @@ title: MTRR Failures
 permalink: /mtrr-failure/
 ---
 
-# MTRR Failures
-
 Here is the MTRR failure reported by the Linux kernel in dmesg.
 
 ```

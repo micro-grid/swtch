@@ -1,10 +1,8 @@
 ---
 layout: page
-title: How to bind ethernet ports to VFIO-PC
+title: Bind Ethernet Ports
 permalink: /devbind/
 ---
-
-# Bind Ethernet Ports to VFIO-PCI
 
 In order to create DPDK-based OpenvSwitch, we need to bind the physical ports to the kernel module vfio-pci (Virtual Function IO PCI) driver instead of the default e1000e (for Intel NIC) driver.
 

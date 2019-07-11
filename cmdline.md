@@ -1,1 +1,39 @@
+---
+layout: page
+title: Linux Command Line
+permalink: /cmdline/
+---
+
+The OpenvSwitch and DPDK requires us to use IOMMMU (IO Memory Mapped ?) to access the PCI cards instead of using DMA (Direct Memory Access) Interrupts.
+
+And to use HugePages TLB (Translate Lookaside Buffer) which keeps a map of how the virtual memory addresses are mapped to actual physical address since in our systems our virtual address space is 48 bits and is much larger than physical or actual address space which is restricted to the amount of physical RAM installed in the system.
+
+In a nutshell, the Intel DPDK Device Driver uses IOMMU and /dev/hugepages to operate the physical ports of the Intel NIC (Network Interface Card).
+
+## Enable IOMMU in BIOS Setting
+
+The system BIOS, the system motherboard, and the CPU should be able to handle IOMMU. If you have a very old system or your BIOS is not updated, then IOMMU is most likely not available on your system.
+
+To check, reboot the system, press F2 or F12 to boot into your BIOS setting and then enable VT-d (which is another name for IOMMU). 
+
+Some of the systems have UEFI Secure boot process and this would also restrict what you can do with the BIOS settings. Most of the ATMs (Bank Teller Machines), Android phones and other kiosk like systems have secure UEFI boot process. If your BIOS is UEFI Secure, then you need to consult your system manual to figure out how to turn it off or find out if VT-d is enabled.
+
+## Enable IOMMU is Linux Command Line
+
+In addition to the BIOS setting, you also need to pass in command line options to your Linux boot loader.
+
+On most Ubuntu systems, the boot loader is `grub`. As is the case with Linux, there are many boot loaders. We will assume you are using `grub`.
+
+```
+# Check the current Linux Command Line Options
+cat /proc/cmdline
+
+# Edit the Command Line options, I am using vim editor, you can use any other editor
+sudo vim /etc/
+```
+
+
+
+
+
 BOOT_IMAGE=/boot/vmlinuz-4.18.0-24-generic root=UUID=c46c6b92-5ff7-48ca-8efc-3d3917e32a1c ro quiet splash mtrr_gran_size=64M mtrr_chunk_size=128M hugepages=1024 iommu=pt intel_iommu=on vt.handoff=1

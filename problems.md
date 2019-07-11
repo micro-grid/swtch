@@ -1,10 +1,8 @@
 ---
 layout: page
-title: A List of Problems
+title: List of Problems
 permalink: /problems/
 ---
-
-# List of Problems
 
 I encountered many problems when trying to successfully build the SDN Switch. Here are some notes on how I resolved them.
 
