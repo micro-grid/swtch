@@ -22,21 +22,21 @@ We have build DPDK libraries, Open vSwitch Kernel Modules and Daemons with DPDK 
 
 Start with configuring the Linux kernel boot parameters to enable Intel or AMD VT-d and support for HugePages.
 
-### [Configure Linux Boot Parameters](/swtch/cmdline/)
+- [Configure Linux Boot Parameters](/swtch/cmdline/)
 
-### [Install Apt Packages](/swtch/apt/)
+- [Install Apt Packages](/swtch/apt/)
 
-### [Download DPDK & Open vSwitch](/swtch/dependencies/)
+- [Download DPDK & Open vSwitch](/swtch/dependencies/)
 
-### [Build DPDK & Open vSwitch](/swtch/compile)
+- [Build DPDK & Open vSwitch](/swtch/compile)
 
-### [Configure and Run OVS](/swtch/run/)
+- [Configure and start the physical switch](/swtch/run/)
 
-### [Setup FaucetSDN Controller]()
+- [Setup FaucetSDN Controller]()
 
-### [Setup Virtual LANs]()
+- [Setup Virtual LANs]()
 
-### [Monitor SDN Switch]()
+- [Monitor SDN Switch]()
 
 ### [Network Resiliency]()
 
