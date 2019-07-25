@@ -32,7 +32,7 @@ Start with configuring the Linux kernel boot parameters to enable Intel or AMD V
 
 - [Configure and start the physical switch](/swtch/run/)
 
-- [Setup FaucetSDN Controller]()
+- [Setup FaucetSDN Controller](/swtch/faucet)
 
 - [Setup Virtual LANs]()
 

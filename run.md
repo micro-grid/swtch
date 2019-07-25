@@ -212,7 +212,10 @@ OFPST_PORT_DESC reply (OF1.3) (xid=0x3):
 OFPT_GET_CONFIG_REPLY (OF1.3) (xid=0x9): frags=normal miss_send_len=0
 # End of output
 
-# It shows the fifth port is for the bridge and that is visible to the SDN and Faucet controllers?
+# It shows the fifth port is for the LOCAL(br0) bridge port 
+# and is needed for the OVS and Faucet controllers?
+# Or is it the management port?
+# Or is it the 
 
 # Faucet needs the datapath_id for br0, make a note of it
 sudo ovs-vsctl get bridge br0 datapath_id
@@ -242,3 +245,64 @@ Here is a summary of all of the commands:
 - Check status of bridge br0
 - Start Faucet controller
 
+{% highlight bash %}
+# Load kernel modules
+sudo modprobe vfio-pci
+sudo modprobe openvswitch
+
+sudo chmod a+x /dev/vfio
+sudo chmod 0666 /dev/vfio/*
+
+# Bind Intel NIC PCI devices to vfio-pci driver
+DPDK_DIR=/usr/src/dpdk-stable-18.11.1
+sudo $DPDK_DIR/usertools/dpdk-devbind.py --bind=vfio-pci \
+        0000:03:00.0 0000:03:00.1 0000:04:00.0 0000:04:00.1
+
+# Create openvswitch folder for db.sock communications
+sudo mkdir -p /var/run/openvswitch
+
+# Start the ovsdb-server
+sudo ovsdb-server --remote=punix:/var/run/openvswitch/db.sock \
+    --remote=db:Open_vSwitch,Open_vSwitch,manager_options \
+    --private-key=db:Open_vSwitch,SSL,private_key \
+    --certificate=db:Open_vSwitch,SSL,certificate \
+    --bootstrap-ca-cert=db:Open_vSwitch,SSL,ca_cert \
+    --pidfile --detach --log-file
+
+# Configure the ovs-vsctl daemon
+sudo ovs-vsctl --no-wait set Open_vSwitch . \
+        other_config:dpdk-init=true \
+        other_config:dpdk-hugepage-dir=/dev/hugepages
+
+# Start the ovs-vsctl daemon
+sudo /usr/share/openvswitch/scripts/ovs-ctl --no-ovsdb-server start
+# sudo /usr/share/openvswitch/scripts/ovs-ctl start
+
+# Create the bridge br0
+sudo ovs-vsctl --may-exist add-br br0 -- set bridge br0 \
+        datapath_type=netdev protocols=OpenFlow13
+
+# Add the 4 dpdk ports to the bridge br0
+sudo ovs-vsctl --may-exist add-port br0 dpdk0 -- set interface dpdk0 \
+        type=dpdk options:dpdk-devargs=0000:03:00.0
+sudo ovs-vsctl --may-exist add-port br0 dpdk1 -- set interface dpdk1 \
+        type=dpdk options:dpdk-devargs=0000:03:00.1
+sudo ovs-vsctl --may-exist add-port br0 dpdk2 -- set interface dpdk2 \
+        type=dpdk options:dpdk-devargs=0000:04:00.0
+sudo ovs-vsctl --may-exist add-port br0 dpdk3 -- set interface dpdk3 \
+        type=dpdk options:dpdk-devargs=0000:04:00.1
+
+# Set failure mode for the bridge
+sudo ovs-vsctl set-fail-mode br0 secure
+
+# Set controller for the bridge
+sudo ovs-vsctl set-controller br0 tcp:127.0.0.1:6653
+
+# List the bridge br0 properties
+sudo ovs-vsctl list bridge
+
+# Show the status of the bridge using OpenFlow
+sudo ovs-ofctl -O OpenFlow13 show br0
+
+
+{% endhighlight %}
