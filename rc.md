@@ -27,6 +27,7 @@ Copy the following contents to the `/usr/local/libexec/my-startup-script` file.
 modprobe vfio-pci
 modprobe openvswitch
 
+# Modify attributes for /dev/vfio
 chmod a+x /dev/vfio
 chmod 0666 /dev/vfio/*
 

@@ -4,6 +4,14 @@ title: Configuration
 permalink: /run/
 ---
 
+After you have compiled and installed Open-vSwitch with DPDK and Faucet SDN Controller. You still need to configure the switch, the PCI ports and start various daemons.
+
+The Open-vSwitch has two main daemons, the `ovsdb-server` and the `ovs-vsctl`. Since we are using DPDK we have to start `ovs-vsctl` with various DPDK flags. Which means we cannot use the default `ovs-ctl` bash script.
+
+Additionally most of the configuration does not survive a reboot, you have to load kernel modules again, bind the PCI devices again, configure the switch again, start the ovs daemons again.
+
+I will first describe the initial configuration and the the reboot configuration. I have also written a `systemd` service to automate the switch configuration at reboot.
+
 ## Initial Configuration
 
 The following commands describe how to configure and run the various components to start the SDN switch the very first time.
@@ -225,13 +233,13 @@ sudo ovs-vsctl get bridge br0 datapath_id
 
 # Create faucet.yaml file 
 
-
-
+# Start the Faucet Controller
 
 # To stop any previous OVS Controller
 sudo /usr/share/openvswitch/scripts/ovs-ctl stop
 
 {% endhighlight %}
+
 
 ## Reboot Configuration
 
@@ -304,5 +312,10 @@ sudo ovs-vsctl list bridge
 # Show the status of the bridge using OpenFlow
 sudo ovs-ofctl -O OpenFlow13 show br0
 
-
 {% endhighlight %}
+
+## Automate Reboot Configuration
+
+Follow the instructions to [create a startup systemd service](/swtch/rc) to automate the reboot configuration steps.
+
+Before `systemd` you would have used `/etc/rc.local` to run commands at system startup. Now that has been deprecated and you have to write a `systemd service` unit instead.

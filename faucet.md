@@ -53,7 +53,7 @@ check_faucet_config /etc/faucet/faucet.yaml
 Restart the faucet controller.
 
 {% highlight bash %}
-sudo systemctl reload faucet
+sudo systemctl restart faucet
 
 sudo systemctl status faucet
 
